@@ -34,9 +34,6 @@ def computeDK(theta1, theta2, theta3, l1=constL1, l2=constL2, l3=constL3):
     return [x, y, z]
 
 def computeIK(x, y, z, l1=constL1, l2=constL2, l3=constL3):
-    x = P3X
-    y = P3Y
-    z = P3Z
 
     d13 = math.sqrt(x**2 + y**2) - l1
     d = math.sqrt(d13**2 + z**2)
@@ -60,34 +57,56 @@ def computeIK(x, y, z, l1=constL1, l2=constL2, l3=constL3):
 
     return (theta1, theta2, theta3)
 
-# Direct Kinematics - Choose Theta used for DK
-#t1 = input("DK Theta 1 in degrees : ")
-#t1 = float(t1)
-#t2 = input("DK Theta 2 in degrees : ")
-#t2 = float(t2)
-#t3 = input("DK Theta 3 in degrees : ")
-#t3 = float(t3)
-
-# Inverse Kinematics - Choose Positions used for IK
-P3X = 0  
-P3Y = 0
-P3Z = 0
-
 def main():
-    print("Testing the kinematic funtions (computeDK)...")
+    print("\nTesting the kinematic funtions (computeDK)...\n")
     print ("OK Test 1 - Values : 0°,0°,0° \n\tExpected : [118.79, 0.0, -115.14]")
     print(
-        "\t Results : {}".format(computeDK(0,0,0, 
-        l1=constL1, l2=constL2, l3=constL3)
+        "\t Results : {}".format(computeDK(0,0,0, l1=constL1, l2=constL2, l3=constL3)
         )
     )
     print()
-    print("Testing the inverse kinematic funtions (computeIK)...")
+    print ("OK Test 2 - Values : 90°,0°,0° \n\tExpected : [0.0, 118.79, -115.14]")
     print(
-        "\t P3[{0} ; {1} ; {2}] --> {3}".format(P3X, P3Y, P3Z,
-            computeIK(P3X, P3Y, P3Z, l1=constL1, l2=constL2, l3=constL3)
+        "\t Results : {}".format(computeDK(90,0,0, l1=constL1, l2=constL2, l3=constL3)
         )
     )
+    print()
+    print ("OK Test 3 - Values : 180°,-30.501°,-67.819° \n\tExpected : [-64.14, 0.0, -67.79]")
+    print(
+        "\t Results : {}".format(computeDK(180,-30.501,-67.79, l1=constL1, l2=constL2, l3=constL3)
+        )
+    )
+    print()
+    print ("OK Test 4 - Values : 0°,-30.645°,38.501° \n\tExpected : [203.23, 0.0, -14.30]")
+    print(
+        "\t Results : {}".format(computeDK(0,-30.645,38.501, l1=constL1, l2=constL2, l3=constL3)
+        )
+    )
+    print("\n===================================================================================")
+    print("\nTesting the inverse kinematic funtions (computeIK)...\n")
+    print ("OK Test 5 - Values : [118.79, 0.0, -115.14] \n\tExpected : (0°,0°,0°)")
+    print(
+        "\t Results : {}".format(computeIK(118.79,0.0,-115.14, l1=constL1, l2=constL2, l3=constL3)
+        )
+    )
+    print()
+    print ("OK Test 6 - Values : [0.0, 118.79, -115.14] \n\tExpected : (90°,0°,0°)")
+    print(
+        "\t Results : {}".format(computeIK(0,118.79,-115.14, l1=constL1, l2=constL2, l3=constL3)
+        )
+    )
+    print()
+    print ("OK Test 7 - Values : [-64.14, 0.0, -67.79] \n\tExpected : (180°,-30.501°,-67.819°)")
+    print(
+        "\t Results : {}".format(computeIK(-64.14, 0.0, -67.79, l1=constL1, l2=constL2, l3=constL3)
+        )
+    )
+    print()
+    print ("OK Test 8 - Values : [203.23, 0.0, -14.30] \n\tExpected : (0°,-30.645°,38.501°)")
+    print(
+        "\t Results : {}".format(computeIK(203.23, 0.0, -14.30, l1=constL1, l2=constL2, l3=constL3)
+        )
+    ) 
     print()
 
 

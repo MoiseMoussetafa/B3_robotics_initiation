@@ -1,4 +1,4 @@
-# KINEMATICS Program
+# KINEMATICS Programs
 
 kinematics.py 
 - Direct Kinematics : with tests angles of Theta1, Theta2, Theta3 and obtain positions X, Y, Z of P3

@@ -238,6 +238,18 @@ def circle(x, z, r, t, duration):
     """
     None
 
+def segment(segment_x1, segment_y1, segment_z1, 
+    segment_x2, segment_y2, segment_z2, t, duration):
+    nt = ((math.cos(2*math.pi*(1/duration)*t) + 1 )* duration ) / 2
+    
+    x = (nt/duration) * (segment_x2-segment_x1) + segment_x1
+    y = (nt/duration) * (segment_y2-segment_y1) + segment_y1
+    z = (nt/duration) * (segment_z2-segment_z1) + segment_z1
+
+    theta1, theta2, theta3 = computeIK(x,y,z)
+
+    return (theta1, theta2, theta3)
+
 
 def main():
     print(

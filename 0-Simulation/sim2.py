@@ -106,7 +106,6 @@ while True:
             z = p.readUserDebugParameter(sliders["triangle_z"])
             h = p.readUserDebugParameter(sliders["triangle_h"])
             w = p.readUserDebugParameter(sliders["triangle_w"])
-
             alphas = kinematics.triangle(x, z, h, w, sim.t)
             targets = {
                 "motor1": -alphas[0],
@@ -124,7 +123,6 @@ while True:
             r = p.readUserDebugParameter(sliders["circle_r"])
             duration = p.readUserDebugParameter(sliders["circle_duration"])
             alphas = kinematics.circle(x, z, r, sim.t, duration)
-
             targets = {
                 "motor1": -alphas[0],
                 "motor2": -alphas[1],
@@ -134,6 +132,7 @@ while True:
             pos[0] += bx
             pos[2] += bz
             sim.addDebugPosition(pos, duration=3)
+
         elif args.mode == "segment":
             segment_x1 = p.readUserDebugParameter(sliders["segment_x1"])
             segment_y1 = p.readUserDebugParameter(sliders["segment_y1"])
@@ -152,7 +151,6 @@ while True:
                 sim.t,
                 duration,
             )
-
             targets = {
                 "motor1": -alphas[0],
                 "motor2": -alphas[1],

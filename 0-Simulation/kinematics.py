@@ -212,11 +212,7 @@ def computeIKOriented(x, y, z, legID, params, extra_theta=0, verbose=False):
 # Given the destination point (x, y, z) of a limb with 3 rotational axes separated by the distances (l1, l2, l3),
 # returns the angles to apply to the 3 axes
 def computeIKNotOriented(x, y, z, legID, params, extra_theta=0, verbose=False):
-    alphas = computeIK(
-        params.initLeg[legID-1][0], 
-        params.initLeg[legID-1][1], 
-        params.z)
-    return alphas
+    None
 
 
 def rotaton_2D(x, y, z, theta):
@@ -268,6 +264,7 @@ def trianglePoints(x, z, h, w):
 def trianglePoints2(x, z, h, w):
     """
     Takes the geometric parameters of the triangle and returns the position of the 3 points of the triagles. Format : [[x1, y1, z1], [x2, y2, z2], [x3, y3, z3]]
+    Specific used for walk
     """
     P1 = [0, x, z+h]
     P2 = [w/2, x, z]
@@ -285,7 +282,7 @@ def segdist(P1, P2):
 
 def triangle_w(x, z, h, w, t, period, leg_id, params, extra_theta):
     """
-    Takes the geometric parameters of the triangle and the current time, gives the joint angles to draw the triangle with the tip of th leg. Format : [theta1, theta2, theta3]
+    Function triangle specially used for walk
     """
     alphas = [0,0,0]
     points = trianglePoints2(x,z,h,w)
@@ -311,7 +308,7 @@ def triangle_w(x, z, h, w, t, period, leg_id, params, extra_theta):
 
 def triangle_for_rotation(x, z, h, w, t, period=5):
     """
-    Takes the geometric parameters of the triangle and the current time, gives the joint angles to draw the triangle with the tip of th leg. Format : [theta1, theta2, theta3]
+    Function triangle specially used for rotation
     """
     points = trianglePoints(x,z,h,w)
     d1 = segdist(points[0],points[1])
@@ -375,6 +372,7 @@ def circle(x, z, r, t, duration):
     return alphas
 
 def demicircle(x, y, z, r, t, duration, legID, params, extra_theta):
+    """Not used for the moment, not working now"""
     y_circle = r * math.cos(2 * math.pi * (1 / duration) * t)
     z_circle =+ r * math.sin(2 * math.pi * (1 / duration) * t)
     p1 = [x, y_circle + r, z]
@@ -386,6 +384,7 @@ def demicircle(x, y, z, r, t, duration, legID, params, extra_theta):
     else :
         alphas = computeIKOriented(x, y_circle, z_circle + z, legID, params, extra_theta)
     return alphas
+
 
 def segment(segment_x1, segment_y1, segment_z1,
             segment_x2, segment_y2, segment_z2, t, duration):
@@ -423,7 +422,7 @@ def segment_modulo(segment_x1, segment_y1, segment_z1, segment_x2, segment_y2, s
 
 def segment_oneway(segment_x1, segment_y1, segment_z1, segment_x2, segment_y2, segment_z2, t, duration):
     """
-    Used for triangle, segment in only one direction
+    Function segment used for triangle in the rotation, a segment in only one direction
     """
     nt = math.fmod(t,duration)
         
@@ -438,7 +437,7 @@ def segment_oneway(segment_x1, segment_y1, segment_z1, segment_x2, segment_y2, s
 
 def segment_oneway_w(segment_x1, segment_y1, segment_z1, segment_x2, segment_y2, segment_z2, t, duration, leg_id, params, extra_theta):
     """
-    Used for triangle, segment in only one direction
+    Function segment used for triangle in the walk, a segment in only one direction
     """
     nt = math.fmod(t,duration)
         
